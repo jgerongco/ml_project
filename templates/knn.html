@@ -1,6 +1,48 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>{{ title }}</h2>
-<p>Feature under construction.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KNN Product Category Predictor</title>
+</head>
+<body>
+    <div class="container">
+        <h1>KNN Product Category Predictor</h1>
+
+        <!-- Form for user input -->
+        <form method="POST">
+            <div class="form-group">
+                <label for="brand_name">Enter Brand Name:</label>
+                <input type="text" id="brand_name" name="brand_name" placeholder="e.g., Nature Spring" required>
+            </div>
+            <button type="submit">Predict Product Category</button>
+        </form>
+
+        <!-- Display the result if available -->
+        {% if prediction %}
+        <div class="result">
+            <h2>Prediction Results</h2>
+            <p><strong>Brand Name:</strong> {{ brand_name }}</p>
+            <p><strong>Predicted Product Category:</strong> {{ prediction }}</p>
+            <p><strong>Recommended Products:</strong></p>
+            <ul>
+                {% for product in recommendations %}
+                <li>{{ product }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <!-- Display error message if available -->
+        {% if error %}
+        <div class="error">
+            <p>{{ error }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
 {% endblock %}
